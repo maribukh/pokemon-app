@@ -1,13 +1,4 @@
-export interface Pokemon {
-  id: number;
-  name: string;
-  height: number;
-  weight: number;
-  types: PokemonType[];
-  sprites: PokemonSprites;
-}
-
-interface PokemonType {
+export interface PokemonType {
   slot: number;
   type: {
     name: string;
@@ -15,7 +6,16 @@ interface PokemonType {
   };
 }
 
-interface PokemonSprites {
+export interface PokemonStat {
+  base_stat: number;
+  effort: number;
+  stat: {
+    name: string;
+    url: string;
+  };
+}
+
+export interface PokemonSprites {
   front_default: string | null;
   other?: {
     'official-artwork'?: {
@@ -24,7 +24,17 @@ interface PokemonSprites {
   };
 }
 
-interface PokemonListItem {
+export interface Pokemon {
+  id: number;
+  name: string;
+  height: number;
+  weight: number;
+  types: PokemonType[];
+  stats: PokemonStat[];
+  sprites: PokemonSprites;
+}
+
+export interface PokemonListItem {
   name: string;
   url: string;
 }
