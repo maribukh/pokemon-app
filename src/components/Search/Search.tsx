@@ -13,8 +13,8 @@ class Search extends Component<SearchProps, SearchState> {
   };
 
   handleSearchClick = () => {
-    const success = performSearch(this.state.value, this.props.onSearch);
-    if (success) {
+    const wasSearched = performSearch(this.state.value, this.props.onSearch);
+    if (wasSearched) {
       this.setState({ value: this.state.value.trim() });
     }
   };
