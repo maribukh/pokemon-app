@@ -1,12 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,500,600,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700;800&display=swap');
 
 :root {
-  --bg: #f8fafc;
-  --surface: #ffffff;
+  --bg-image: url('background.jpg');
+  --bg: #f8f7f5;
+  --surface: rgba(255, 255, 255, 0.72);
   --primary: #3b82f6;
   --text: #0f172a;
+  --text-h: #08060d;
   --text-dim: #94a3b8;
+  --heading: 'Fraunces', serif;
   --border: #e2e8f0;
+  --code-bg: #f4f3ec;
+  --mono: 'JetBrains Mono', ui-monospace, monospace;
+  --shadow: rgba(0, 0, 0, 0.08) 0 10px 24px -6px;
 }
 
 * {
@@ -16,8 +23,20 @@
 }
 
 body {
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(248, 247, 245, 0.88), rgba(248, 247, 245, 0.94)),
+    var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--text);
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Nunito', sans-serif;
   -webkit-font-smoothing: antialiased;
+}
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
