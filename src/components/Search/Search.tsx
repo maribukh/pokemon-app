@@ -1,47 +1,36 @@
-import { Component } from 'react';
-import type { SearchProps, SearchState } from './Search.types';
-import { performSearch, getInitialSearchValue } from '../../utils/searchUtils';
+import type { ChangeEvent, KeyboardEvent } from 'react';
+import type { SearchProps } from './Search.types';
+import { useSearchTerm } from '../../hooks/useSearchTerm';
 import './Search.css';
 
-class Search extends Component<SearchProps, SearchState> {
-  state: SearchState = {
-    value: getInitialSearchValue(),
+function Search({ onSearch }: SearchProps) {
+  const { value, setValue, search } = useSearchTerm(onSearch);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
   };
 
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ value: e.target.value });
-  };
-
-  handleSearchClick = () => {
-    const wasSearched = performSearch(this.state.value, this.props.onSearch);
-    if (wasSearched) {
-      this.setState({ value: this.state.value.trim() });
-    }
-  };
-
-  handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      this.handleSearchClick();
+      search();
     }
   };
 
-  render() {
-    return (
-      <div className="search">
-        <input
-          type="text"
-          className="search__input"
-          value={this.state.value}
-          onChange={this.handleChange}
-          onKeyDown={this.handleKeyDown}
-          placeholder="Search pokemon..."
-        />
-        <button className="search__button" onClick={this.handleSearchClick}>
-          Search
-        </button>
-      </div>
-    );
-  }
+  return (
+    <div className="search">
+      <input
+        type="text"
+        className="search__input"
+        value={value}
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        placeholder="Search pokemon..."
+      />
+      <button className="search__button" onClick={search}>
+        Search
+      </button>
+    </div>
+  );
 }
 
 export default Search;
