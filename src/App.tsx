@@ -1,18 +1,27 @@
-import { Component } from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import PokemonDetails from './pages/PokemonDetails/PokemonDetails';
+import About from './pages/About/About';
+import NotFound from './pages/NotFound/NotFound';
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <ErrorBoundary>
+function App() {
+  return (
+    <ErrorBoundary>
+      <BrowserRouter>
         <div className="app-shell">
-          <HomePage />
+          <Routes>
+            <Route path="/" element={<HomePage />}>
+              <Route path="details/:id" element={<PokemonDetails />} />
+            </Route>
+            <Route path="/about" element={<About />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
         </div>
-      </ErrorBoundary>
-    );
-  }
+      </BrowserRouter>
+    </ErrorBoundary>
+  );
 }
 
 export default App;
