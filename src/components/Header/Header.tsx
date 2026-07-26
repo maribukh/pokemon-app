@@ -1,18 +1,24 @@
-import { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
-class Header extends Component {
-  render() {
-    return (
-      <header className="header-area">
-        <div className="header-container">
-          <div className="brand">
-            <h1>Poki Land</h1>
-          </div>
+function Header() {
+  return (
+    <header className="header-area">
+      <div className="header-container">
+        <div className="brand">
+          <h1>Poki Land</h1>
         </div>
-      </header>
-    );
-  }
+        <nav className="header-nav">
+          <Link to="/" className="header-nav__link">
+            Home
+          </Link>
+          <Link to="/about" className="header-nav__link">
+            About
+          </Link>
+        </nav>
+      </div>
+    </header>
+  );
 }
 
 export default Header;
