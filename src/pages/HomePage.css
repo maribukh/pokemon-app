@@ -1,0 +1,21 @@
+.results-section--split {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.results-section__list {
+  min-width: 0;
+}
+
+.results-section__details {
+  position: sticky;
+  top: 90px;
+}
+
+@media (max-width: 768px) {
+  .results-section--split {
+    grid-template-columns: 1fr;
+  }
+}
