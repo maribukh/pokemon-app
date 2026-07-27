@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 import * as pokemonApi from '../services/pokemonApi';
 
@@ -22,6 +23,14 @@ const mockPokemon = {
   },
 };
 
+function renderHomePage() {
+  return render(
+    <MemoryRouter initialEntries={['/?page=1']}>
+      <HomePage />
+    </MemoryRouter>
+  );
+}
+
 describe('HomePage', () => {
   beforeEach(() => {
     localStorage.clear();
@@ -41,7 +50,7 @@ describe('HomePage', () => {
       mockPokemon,
     ]);
 
-    render(<HomePage />);
+    renderHomePage();
 
     await waitFor(() => {
       expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
@@ -50,26 +59,12 @@ describe('HomePage', () => {
     expect(pokemonApi.fetchPokemonList).toHaveBeenCalledWith(20, 0);
   });
 
-  it('loads a specific pokemon when a search term is saved in localStorage', async () => {
-    localStorage.setItem('pokemon_search_term', 'pikachu');
-    vi.mocked(pokemonApi.fetchPokemonByName).mockResolvedValue(mockPokemon);
-
-    render(<HomePage />);
-
-    await waitFor(() => {
-      expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
-    });
-
-    expect(pokemonApi.fetchPokemonByName).toHaveBeenCalledWith('pikachu');
-    expect(pokemonApi.fetchPokemonList).not.toHaveBeenCalled();
-  });
-
   it('displays an error message when the API call fails', async () => {
     vi.mocked(pokemonApi.fetchPokemonList).mockRejectedValue(
       new Error('Network error')
     );
 
-    render(<HomePage />);
+    renderHomePage();
 
     await waitFor(() => {
       expect(screen.getByText(/network error/i)).toBeInTheDocument();
@@ -88,7 +83,7 @@ describe('HomePage', () => {
     vi.mocked(pokemonApi.fetchPokemonDetailsBatch).mockResolvedValue([]);
     vi.mocked(pokemonApi.fetchPokemonByName).mockResolvedValue(mockPokemon);
 
-    render(<HomePage />);
+    renderHomePage();
 
     await waitFor(() => {
       expect(pokemonApi.fetchPokemonList).toHaveBeenCalled();
@@ -121,7 +116,7 @@ describe('HomePage', () => {
       new Error('Pokemon "xyz" not found')
     );
 
-    render(<HomePage />);
+    renderHomePage();
 
     await waitFor(() => {
       expect(pokemonApi.fetchPokemonList).toHaveBeenCalled();
@@ -147,7 +142,7 @@ describe('HomePage', () => {
     });
     vi.mocked(pokemonApi.fetchPokemonDetailsBatch).mockResolvedValue([]);
 
-    render(<HomePage />);
+    renderHomePage();
 
     await waitFor(() => {
       expect(

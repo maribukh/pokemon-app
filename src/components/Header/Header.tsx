@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Header.css';
 
 function Header() {
@@ -9,12 +9,27 @@ function Header() {
           <h1>Poki Land</h1>
         </div>
         <nav className="header-nav">
-          <Link to="/" className="header-nav__link">
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              isActive
+                ? 'header-nav__link header-nav__link--active'
+                : 'header-nav__link'
+            }
+          >
             Home
-          </Link>
-          <Link to="/about" className="header-nav__link">
+          </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive
+                ? 'header-nav__link header-nav__link--active'
+                : 'header-nav__link'
+            }
+          >
             About
-          </Link>
+          </NavLink>
         </nav>
       </div>
     </header>

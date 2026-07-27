@@ -37,16 +37,6 @@ function HomePage() {
   const page = Number(searchParams.get('page') ?? '1');
   const isDetailsOpen = location.pathname.includes('/details/');
 
-  useEffect(() => {
-    if (!searchParams.has('page')) {
-      setSearchParams({ page: '1' }, { replace: true });
-    }
-  }, []);
-
-  useEffect(() => {
-    loadData(term, page);
-  }, [page, term]);
-
   const loadData = async (searchTerm: string, currentPage: number) => {
     setLoading(true);
     setError(null);
@@ -73,6 +63,10 @@ function HomePage() {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    loadData(term, page);
+  }, [page, term]);
 
   const handleSearch = (newTerm: string) => {
     setTerm(newTerm);

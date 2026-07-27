@@ -11,7 +11,8 @@
 
 .results-section__details {
   position: sticky;
-  top: 90px;
+  width: 400px;
+  top: 200px;
 }
 
 @media (max-width: 768px) {
