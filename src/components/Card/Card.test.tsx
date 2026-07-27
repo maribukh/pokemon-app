@@ -3,31 +3,33 @@ import { render, screen } from '@testing-library/react';
 import Card from './Card';
 
 describe('Card', () => {
-  const defaultProps = {
+  const baseProps = {
     id: 25,
     name: 'pikachu',
-    types: ['electric'],
     imageUrl: 'https://example.com/pikachu.png',
   };
 
   it('renders pokemon name', () => {
-    render(<Card {...defaultProps} />);
+    render(<Card {...baseProps} types={['electric']} />);
     expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
   });
 
-  it('renders pokemon type', () => {
-    render(<Card {...defaultProps} />);
-    expect(screen.getByText(/electric/i)).toBeInTheDocument();
-  });
+  it.each(['electric', 'fire', 'water', 'grass'])(
+    'renders "%s" type tag',
+    (type) => {
+      render(<Card {...baseProps} types={[type]} />);
+      expect(screen.getByText(new RegExp(type, 'i'))).toBeInTheDocument();
+    }
+  );
 
   it('renders image with correct src and alt', () => {
-    render(<Card {...defaultProps} />);
+    render(<Card {...baseProps} types={['electric']} />);
     const image = screen.getByRole('img', { name: /pikachu/i });
-    expect(image).toHaveAttribute('src', defaultProps.imageUrl);
+    expect(image).toHaveAttribute('src', baseProps.imageUrl);
   });
 
   it('falls back to placeholder image on error', () => {
-    render(<Card {...defaultProps} />);
+    render(<Card {...baseProps} types={['electric']} />);
     const image = screen.getByRole('img', { name: /pikachu/i });
 
     image.dispatchEvent(new Event('error'));
@@ -36,7 +38,7 @@ describe('Card', () => {
   });
 
   it('renders with no types gracefully', () => {
-    render(<Card {...defaultProps} types={[]} />);
+    render(<Card {...baseProps} types={[]} />);
     expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
   });
 });

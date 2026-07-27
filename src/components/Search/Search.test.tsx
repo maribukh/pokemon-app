@@ -2,10 +2,14 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import Search from './Search';
+import * as storage from '../../utils/storage';
+
+vi.mock('../../utils/storage');
 
 describe('Search', () => {
   beforeEach(() => {
-    localStorage.clear();
+    vi.clearAllMocks();
+    vi.mocked(storage.getSavedSearchTerm).mockReturnValue('');
   });
 
   it('renders input and search button', () => {
@@ -23,7 +27,7 @@ describe('Search', () => {
   });
 
   it('displays previously saved search term on mount', () => {
-    localStorage.setItem('pokemon_search_term', 'pikachu');
+    vi.mocked(storage.getSavedSearchTerm).mockReturnValue('pikachu');
     render(<Search onSearch={vi.fn()} />);
     const input = screen.getByPlaceholderText(
       /search pokemon/i
@@ -41,7 +45,11 @@ describe('Search', () => {
     expect(input).toHaveValue('charizard');
   });
 
-  it('calls onSearch with trimmed value when search button is clicked', async () => {
+  it.each([
+    ['  squirtle  ', 'squirtle'],
+    ['charizard', 'charizard'],
+    ['   bulbasaur', 'bulbasaur'],
+  ])('trims "%s" to "%s" before calling onSearch', async (typed, expected) => {
     const user = userEvent.setup();
     const onSearch = vi.fn();
     render(<Search onSearch={onSearch} />);
@@ -49,13 +57,13 @@ describe('Search', () => {
     const input = screen.getByPlaceholderText(/search pokemon/i);
     const button = screen.getByRole('button', { name: /search/i });
 
-    await user.type(input, '  squirtle  ');
+    await user.type(input, typed);
     await user.click(button);
 
-    expect(onSearch).toHaveBeenCalledWith('squirtle');
+    expect(onSearch).toHaveBeenCalledWith(expected);
   });
 
-  it('saves trimmed term to localStorage on search', async () => {
+  it('saves trimmed term via storage when search is performed', async () => {
     const user = userEvent.setup();
     render(<Search onSearch={vi.fn()} />);
 
@@ -65,12 +73,12 @@ describe('Search', () => {
     await user.type(input, '  eevee  ');
     await user.click(button);
 
-    expect(localStorage.getItem('pokemon_search_term')).toBe('eevee');
+    expect(storage.saveSearchTerm).toHaveBeenCalledWith('eevee');
   });
 
   it('does not call onSearch if search value is unchanged', async () => {
+    vi.mocked(storage.getSavedSearchTerm).mockReturnValue('ditto');
     const user = userEvent.setup();
-    localStorage.setItem('pokemon_search_term', 'ditto');
     const onSearch = vi.fn();
 
     render(<Search onSearch={onSearch} />);

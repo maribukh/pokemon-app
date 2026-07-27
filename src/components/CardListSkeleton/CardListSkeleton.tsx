@@ -6,7 +6,7 @@ function CardListSkeleton() {
   return (
     <div className="card-list">
       {placeholders.map((i) => (
-        <div className="skeleton-card" key={i}>
+        <div className="skeleton-card" data-testid="skeleton-card" key={i}>
           <div className="skeleton-image shimmer" />
           <div className="skeleton-content">
             <div className="skeleton-line shimmer skeleton-line--name" />
