@@ -24,7 +24,8 @@
   overflow: hidden;
   transition:
     transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.4s ease;
+    box-shadow 0.4s ease,
+    background-color 0.3s ease;
 }
 
 .specimen-card:hover .specimen-card__inner {
@@ -52,7 +53,8 @@
 
 .specimen-card__header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   position: relative;
   z-index: 1;
@@ -70,6 +72,13 @@
   padding: 4px 12px;
   border-radius: 999px;
   border: 1px solid var(--type-accent);
+}
+
+.specimen-card__checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--type-accent);
 }
 
 .specimen-card__image-wrap {
@@ -111,6 +120,9 @@
   margin: 0;
   padding-top: 10px;
   border-top: 1px solid var(--border);
+  transition:
+    color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 @keyframes cardAppear {

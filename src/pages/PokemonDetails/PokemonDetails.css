@@ -5,6 +5,9 @@
   padding: 24px;
   position: relative;
   text-align: center;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .details-card__close {
@@ -19,6 +22,9 @@
   font-weight: 600;
   cursor: pointer;
   color: var(--text);
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .details-card__image {
@@ -34,6 +40,7 @@
   text-transform: capitalize;
   color: var(--text-h);
   margin-bottom: 8px;
+  transition: color 0.3s ease;
 }
 
 .details-card__types {
@@ -52,6 +59,9 @@
   border: 1px solid var(--border);
   padding: 4px 10px;
   border-radius: 999px;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .details-card__stats {
@@ -60,4 +70,5 @@
   gap: 6px;
   font-size: 0.85rem;
   color: var(--text);
+  transition: color 0.3s ease;
 }

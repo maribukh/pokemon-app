@@ -1,5 +1,12 @@
 import { NavLink } from 'react-router-dom';
+import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import './Header.css';
+
+function getNavLinkClass({ isActive }: { isActive: boolean }): string {
+  return isActive
+    ? 'header-nav__link header-nav__link--active'
+    : 'header-nav__link';
+}
 
 function Header() {
   return (
@@ -8,29 +15,17 @@ function Header() {
         <div className="brand">
           <h1>Poki Land</h1>
         </div>
-        <nav className="header-nav">
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              isActive
-                ? 'header-nav__link header-nav__link--active'
-                : 'header-nav__link'
-            }
-          >
-            Home
-          </NavLink>
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              isActive
-                ? 'header-nav__link header-nav__link--active'
-                : 'header-nav__link'
-            }
-          >
-            About
-          </NavLink>
-        </nav>
+        <div className="header-right">
+          <nav className="header-nav">
+            <NavLink to="/" end className={getNavLinkClass}>
+              Home
+            </NavLink>
+            <NavLink to="/about" className={getNavLinkClass}>
+              About
+            </NavLink>
+          </nav>
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   );

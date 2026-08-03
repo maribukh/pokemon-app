@@ -6,7 +6,9 @@
   width: 100%;
   max-width: 420px;
   border: 1.5px solid var(--border);
-  transition: border-color 0.2s;
+  transition:
+    border-color 0.3s ease,
+    background-color 0.3s ease;
   margin: 24px auto 0;
 }
 
@@ -23,6 +25,7 @@
   background: transparent;
   font-weight: 500;
   color: var(--text-h);
+  transition: color 0.3s ease;
 }
 
 .search__button {
@@ -34,7 +37,10 @@
   font-weight: 700;
   cursor: pointer;
   font-size: 0.75rem;
-  transition: opacity 0.2s;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .search__button:hover {

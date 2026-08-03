@@ -1,9 +1,20 @@
-import type { SyntheticEvent, CSSProperties } from 'react';
+import type {
+  SyntheticEvent,
+  CSSProperties,
+  MouseEvent,
+  ChangeEvent,
+} from 'react';
 import type { CardProps } from './Card.types';
 import { getTypeColor } from '../../utils/typeColors';
+import { useSelectedItemsStore } from '../../store/selectedItemsStore';
 import './Card.css';
 
-function Card({ name, types, imageUrl, onClick }: CardProps) {
+function Card({ id, name, types, imageUrl, onClick }: CardProps) {
+  const isSelected = useSelectedItemsStore((state) =>
+    Boolean(state.selectedItems[id])
+  );
+  const toggleItem = useSelectedItemsStore((state) => state.toggleItem);
+
   const primaryType = types[0] ?? 'normal';
   const color = getTypeColor(primaryType);
 
@@ -16,10 +27,27 @@ function Card({ name, types, imageUrl, onClick }: CardProps) {
     e.currentTarget.src = '/placeholder.png';
   };
 
+  const handleCheckboxClick = (e: MouseEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+  };
+
+  const handleCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+    toggleItem({ id, name, types, imageUrl });
+  };
+
   return (
     <div className="specimen-card" style={cardStyle} onClick={onClick}>
       <div className="specimen-card__inner">
         <div className="specimen-card__header">
+          <input
+            type="checkbox"
+            className="specimen-card__checkbox"
+            checked={isSelected}
+            onChange={handleCheckboxChange}
+            onClick={handleCheckboxClick}
+            aria-label={`Select ${name}`}
+          />
           <span className="specimen-card__type-tag">{primaryType}</span>
         </div>
 

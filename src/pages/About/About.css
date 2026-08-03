@@ -1,14 +1,16 @@
 .about-page {
   max-width: 600px;
-  margin: auto auto;
+  margin: 60px auto;
   padding: 0 20px;
   text-align: center;
   color: var(--text);
+  transition: color 0.3s ease;
 }
 
 .about-page h1 {
   color: var(--text-h);
   margin-bottom: 16px;
+  transition: color 0.3s ease;
 }
 
 .about-page p {
