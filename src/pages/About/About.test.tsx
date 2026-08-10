@@ -8,9 +8,14 @@ describe('About', () => {
     expect(screen.getByText(/about poki land/i)).toBeInTheDocument();
   });
 
-  it('renders a link to the RS School React course', () => {
+  it('renders a link to the RS School course', () => {
     render(<About />);
-    const link = screen.getByRole('link', { name: /rs school react course/i });
-    expect(link).toHaveAttribute('href', 'https://rs.school/courses/reactjs');
+    const link = screen.getByRole('link', {
+      name: /rs js.*front-end short track course/i,
+    });
+    expect(link).toHaveAttribute(
+      'href',
+      'https://rs.school/courses/short-track'
+    );
   });
 });
