@@ -10,10 +10,16 @@
     border-color 0.3s ease;
 }
 
-.details-card__close {
+.details-card__toolbar {
   position: absolute;
   top: 16px;
   right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.details-card__close {
   background: none;
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -27,11 +33,16 @@
     color 0.3s ease;
 }
 
+.details-card__close:hover {
+  border-color: var(--text-h);
+  color: var(--text-h);
+}
+
 .details-card__image {
   width: 160px;
   height: 160px;
   object-fit: contain;
-  margin: 12px auto;
+  margin: 40px auto 12px;
 }
 
 .details-card__name {
