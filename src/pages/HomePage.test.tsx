@@ -1,9 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { MemoryRouter } from 'react-router-dom';
 import HomePage from './HomePage';
 import * as pokemonApi from '../services/pokemonApi';
+import { renderWithProviders } from '../test-utils/renderWithProviders';
+import { useSelectedItemsStore } from '../store/selectedItemsStore';
 
 vi.mock('../services/pokemonApi');
 
@@ -13,28 +14,15 @@ const mockPokemon = {
   height: 4,
   weight: 60,
   types: [{ slot: 1, type: { name: 'electric', url: '' } }],
-  stats: [
-    { base_stat: 35, effort: 0, stat: { name: 'hp', url: '' } },
-    { base_stat: 55, effort: 0, stat: { name: 'attack', url: '' } },
-  ],
-  sprites: {
-    front_default: 'default.png',
-    other: { 'official-artwork': { front_default: 'artwork.png' } },
-  },
+  stats: [],
+  sprites: { front_default: 'default.png' },
 };
-
-function renderHomePage() {
-  return render(
-    <MemoryRouter initialEntries={['/?page=1']}>
-      <HomePage />
-    </MemoryRouter>
-  );
-}
 
 describe('HomePage', () => {
   beforeEach(() => {
     localStorage.clear();
     vi.clearAllMocks();
+    useSelectedItemsStore.setState({ selectedItems: {} });
   });
 
   it('shows loading state and then displays the pokemon list on mount', async () => {
@@ -47,10 +35,10 @@ describe('HomePage', () => {
       ],
     });
     vi.mocked(pokemonApi.fetchPokemonDetailsBatch).mockResolvedValue([
-      mockPokemon,
+      mockPokemon as never,
     ]);
 
-    renderHomePage();
+    renderWithProviders(<HomePage />, { route: '/?page=1' });
 
     await waitFor(() => {
       expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
@@ -64,7 +52,7 @@ describe('HomePage', () => {
       new Error('Network error')
     );
 
-    renderHomePage();
+    renderWithProviders(<HomePage />, { route: '/?page=1' });
 
     await waitFor(() => {
       expect(screen.getByText(/network error/i)).toBeInTheDocument();
@@ -81,16 +69,16 @@ describe('HomePage', () => {
       results: [],
     });
     vi.mocked(pokemonApi.fetchPokemonDetailsBatch).mockResolvedValue([]);
-    vi.mocked(pokemonApi.fetchPokemonByName).mockResolvedValue(mockPokemon);
+    vi.mocked(pokemonApi.fetchPokemonByName).mockResolvedValue(
+      mockPokemon as never
+    );
 
-    renderHomePage();
+    renderWithProviders(<HomePage />, { route: '/?page=1' });
 
-    await waitFor(() => {
-      expect(pokemonApi.fetchPokemonList).toHaveBeenCalled();
-    });
+    await waitFor(() => expect(pokemonApi.fetchPokemonList).toHaveBeenCalled());
 
     const input = screen.getByPlaceholderText(/search pokemon/i);
-    const button = screen.getByRole('button', { name: /search/i });
+    const button = screen.getByRole('button', { name: /^search$/i });
 
     await user.type(input, 'pikachu');
     await user.click(button);
@@ -102,7 +90,7 @@ describe('HomePage', () => {
     expect(screen.getByText(/pikachu/i)).toBeInTheDocument();
   });
 
-  it('shows "not found" error when searching for a non-existent pokemon', async () => {
+  it('invalidates and refetches data when Refresh is clicked', async () => {
     const user = userEvent.setup();
 
     vi.mocked(pokemonApi.fetchPokemonList).mockResolvedValue({
@@ -112,25 +100,18 @@ describe('HomePage', () => {
       results: [],
     });
     vi.mocked(pokemonApi.fetchPokemonDetailsBatch).mockResolvedValue([]);
-    vi.mocked(pokemonApi.fetchPokemonByName).mockRejectedValue(
-      new Error('Pokemon "xyz" not found')
+
+    renderWithProviders(<HomePage />, { route: '/?page=1' });
+
+    await waitFor(() =>
+      expect(pokemonApi.fetchPokemonList).toHaveBeenCalledTimes(1)
     );
 
-    renderHomePage();
+    await user.click(screen.getByRole('button', { name: /refresh/i }));
 
-    await waitFor(() => {
-      expect(pokemonApi.fetchPokemonList).toHaveBeenCalled();
-    });
-
-    const input = screen.getByPlaceholderText(/search pokemon/i);
-    const button = screen.getByRole('button', { name: /search/i });
-
-    await user.type(input, 'xyz');
-    await user.click(button);
-
-    await waitFor(() => {
-      expect(screen.getByText(/not found/i)).toBeInTheDocument();
-    });
+    await waitFor(() =>
+      expect(pokemonApi.fetchPokemonList).toHaveBeenCalledTimes(2)
+    );
   });
 
   it('renders the BuggyButton for error boundary testing', async () => {
@@ -142,7 +123,7 @@ describe('HomePage', () => {
     });
     vi.mocked(pokemonApi.fetchPokemonDetailsBatch).mockResolvedValue([]);
 
-    renderHomePage();
+    renderWithProviders(<HomePage />, { route: '/?page=1' });
 
     await waitFor(() => {
       expect(

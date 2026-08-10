@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Outlet,
   useLocation,
   useNavigate,
   useSearchParams,
 } from 'react-router-dom';
+import { useQueryClient } from '@tanstack/react-query';
 import Header from '../components/Header/Header';
 import Search from '../components/Search/Search';
 import CardList from '../components/CardList/CardList';
@@ -12,61 +13,26 @@ import CardListSkeleton from '../components/CardListSkeleton/CardListSkeleton';
 import ErrorMessage from '../components/ErrorMessage/ErrorMessage';
 import Pagination from '../components/Pagination/Pagination';
 import BuggyButton from '../components/BuggyButton/BuggyButton';
-import {
-  fetchPokemonList,
-  fetchPokemonByName,
-  fetchPokemonDetailsBatch,
-} from '../services/pokemonApi';
-import { mapPokemonToCard } from '../utils/pokemonMapper';
-import type { CardListItem } from '../components/CardList/CardList.types';
+import RefreshButton from '../components/RefreshButton/RefreshButton';
+import { usePokemonListQuery } from '../hooks/usePokemonListQuery';
 import './HomePage.css';
-
-const PAGE_SIZE = 20;
 
 function HomePage() {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
+  const queryClient = useQueryClient();
 
-  const [items, setItems] = useState<CardListItem[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [totalPages, setTotalPages] = useState(1);
   const [term, setTerm] = useState('');
-
   const page = Number(searchParams.get('page') ?? '1');
   const isDetailsOpen = location.pathname.includes('/details/');
 
-  const loadData = async (searchTerm: string, currentPage: number) => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      if (searchTerm) {
-        const pokemon = await fetchPokemonByName(searchTerm);
-        setItems([mapPokemonToCard(pokemon)]);
-        setTotalPages(1);
-      } else {
-        const offset = (currentPage - 1) * PAGE_SIZE;
-        const list = await fetchPokemonList(PAGE_SIZE, offset);
-        const names = list.results.map((r) => r.name);
-        const details = await fetchPokemonDetailsBatch(names);
-        setItems(details.map(mapPokemonToCard));
-        setTotalPages(Math.max(1, Math.ceil(list.count / PAGE_SIZE)));
-      }
-    } catch (err) {
-      const message =
-        err instanceof Error ? err.message : 'Something went wrong';
-      setError(message);
-      setItems([]);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadData(term, page);
-  }, [page, term]);
+  const { data, isLoading, isFetching, isError, error } = usePokemonListQuery(
+    term,
+    page
+  );
+  const items = data?.items ?? [];
+  const totalPages = data?.totalPages ?? 1;
 
   const handleSearch = (newTerm: string) => {
     setTerm(newTerm);
@@ -81,6 +47,10 @@ function HomePage() {
     navigate(`/details/${id}?${searchParams.toString()}`);
   };
 
+  const handleRefresh = () => {
+    queryClient.invalidateQueries({ queryKey: ['pokemonList'] });
+  };
+
   return (
     <>
       <Header />
@@ -91,9 +61,18 @@ function HomePage() {
         className={`results-section ${isDetailsOpen ? 'results-section--split' : ''}`}
       >
         <div className="results-section__list">
-          {loading && <CardListSkeleton />}
-          {!loading && error && <ErrorMessage message={error} />}
-          {!loading && !error && (
+          <div className="results-section__toolbar">
+            <RefreshButton onClick={handleRefresh} isFetching={isFetching} />
+          </div>
+          {isLoading && <CardListSkeleton />}
+          {!isLoading && isError && (
+            <ErrorMessage
+              message={
+                error instanceof Error ? error.message : 'Something went wrong'
+              }
+            />
+          )}
+          {!isLoading && !isError && (
             <>
               <CardList items={items} onItemClick={handleItemClick} />
               <Pagination

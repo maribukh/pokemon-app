@@ -15,8 +15,20 @@
   top: 200px;
 }
 
+.results-section__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1200px;
+  margin: 0 auto 16px;
+  padding: 0 24px;
+}
+
 @media (max-width: 768px) {
   .results-section--split {
     grid-template-columns: 1fr;
+  }
+
+  .results-section__toolbar {
+    padding: 0 16px;
   }
 }
