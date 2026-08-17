@@ -1,0 +1,39 @@
+.results-section--split {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.results-section__list {
+  min-width: 0;
+}
+
+.results-section__details {
+  position: sticky;
+  width: 400px;
+  top: 200px;
+}
+
+.results-section__toolbar {
+  display: flex;
+  justify-content: flex-end;
+  max-width: 1200px;
+  margin: 0 auto 16px;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  .results-section--split {
+    grid-template-columns: 1fr;
+  }
+
+  .results-section__details {
+    width: auto;
+    position: static;
+  }
+
+  .results-section__toolbar {
+    padding: 0 16px;
+  }
+}
