@@ -3,38 +3,45 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import RefreshButton from './RefreshButton';
 
+vi.mock('next-intl', () => ({
+  useTranslations: () => (key: string) => {
+    const translations: Record<string, string> = {
+      idle: 'Refresh',
+      loading: 'Refreshing',
+    };
+
+    return translations[key];
+  },
+}));
+
+vi.mock('../../i18n/navigation', () => ({
+  useRouter: () => ({
+    refresh: vi.fn(),
+  }),
+}));
+
+vi.mock('./actions', () => ({
+  refreshPokemonDataAction: vi.fn().mockResolvedValue(undefined),
+}));
+
 describe('RefreshButton', () => {
   it('renders "Refresh" label when not fetching', () => {
-    render(<RefreshButton onClick={vi.fn()} isFetching={false} />);
+    render(<RefreshButton />);
+
     expect(
       screen.getByRole('button', { name: /^refresh$/i })
     ).toBeInTheDocument();
   });
 
-  it('renders "Refreshing" label and is disabled while fetching', () => {
-    render(<RefreshButton onClick={vi.fn()} isFetching />);
-    const button = screen.getByRole('button', { name: /refreshing/i });
-    expect(button).toBeDisabled();
-  });
-
-  it('calls onClick when clicked', async () => {
+  it('shows "Refreshing" and disables button while refreshing', async () => {
     const user = userEvent.setup();
-    const onClick = vi.fn();
-    render(<RefreshButton onClick={onClick} isFetching={false} />);
 
-    await user.click(screen.getByRole('button', { name: /^refresh$/i }));
+    render(<RefreshButton />);
 
-    expect(onClick).toHaveBeenCalled();
+    const button = screen.getByRole('button', { name: /^refresh$/i });
+
+    await user.click(button);
+
+    expect(screen.getByRole('button', { name: /refreshing/i })).toBeDisabled();
   });
-  vi.mock('../../i18n/navigation', () => ({
-    useRouter: () => ({ refresh: vi.fn() }),
-  }));
-
-  vi.mock('next-intl', () => ({
-    useTranslations: () => (key: string) => key,
-  }));
-
-  vi.mock('./actions', () => ({
-    refreshPokemonDataAction: vi.fn(),
-  }));
 });
