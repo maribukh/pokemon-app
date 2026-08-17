@@ -5,6 +5,7 @@
   padding: 32px 24px 80px;
   max-width: 1200px;
   margin: 0 auto;
+  text-decoration: none;
 }
 
 .card-list__empty {

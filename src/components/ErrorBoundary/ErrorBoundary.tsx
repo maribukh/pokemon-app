@@ -1,9 +1,8 @@
+'use client';
+
 import { Component } from 'react';
 import type { ErrorInfo } from 'react';
-import type {
-  ErrorBoundaryProps,
-  ErrorBoundaryState,
-} from './ErrorBoundary.types';
+import type { ErrorBoundaryProps, ErrorBoundaryState } from './ErrorBoundary.types';
 import './ErrorBoundary.css';
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {

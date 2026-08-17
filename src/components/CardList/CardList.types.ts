@@ -11,5 +11,7 @@ export interface CardListItem {
 
 export interface CardListProps {
   items: CardListItem[];
-  onItemClick?: (id: number) => void;
+  page: number;
+  search: string;
+  detailsId?: string;
 }

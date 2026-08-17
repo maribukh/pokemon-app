@@ -72,6 +72,16 @@
   gap: 20px;
 }
 
+.language-switcher {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 0.75rem;
+  color: var(--text-h);
+  cursor: pointer;
+}
+
 @media (max-width: 640px) {
   .header-area {
     padding: 16px;

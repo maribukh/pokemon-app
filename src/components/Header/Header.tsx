@@ -1,14 +1,20 @@
-import { NavLink } from 'react-router-dom';
+'use client';
+
+import { useTranslations, useLocale } from 'next-intl';
+import { Link, usePathname, useRouter } from '../../i18n/navigation';
 import ThemeToggle from '../ThemeToggle/ThemeToggle';
 import './Header.css';
 
-function getNavLinkClass({ isActive }: { isActive: boolean }): string {
-  return isActive
-    ? 'header-nav__link header-nav__link--active'
-    : 'header-nav__link';
-}
-
 function Header() {
+  const t = useTranslations('header');
+  const locale = useLocale();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const handleLocaleChange = (nextLocale: string) => {
+    router.replace(pathname, { locale: nextLocale });
+  };
+
   return (
     <header className="header-area">
       <div className="header-container">
@@ -17,13 +23,22 @@ function Header() {
         </div>
         <div className="header-right">
           <nav className="header-nav">
-            <NavLink to="/" end className={getNavLinkClass}>
-              Home
-            </NavLink>
-            <NavLink to="/about" className={getNavLinkClass}>
-              About
-            </NavLink>
+            <Link href="/" className="header-nav__link">
+              {t('home')}
+            </Link>
+            <Link href="/about" className="header-nav__link">
+              {t('about')}
+            </Link>
           </nav>
+          <select
+            className="language-switcher"
+            value={locale}
+            onChange={(e) => handleLocaleChange(e.target.value)}
+            aria-label="Language"
+          >
+            <option value="en">EN</option>
+            <option value="ru">RU</option>
+          </select>
           <ThemeToggle />
         </div>
       </div>

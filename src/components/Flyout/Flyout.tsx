@@ -1,19 +1,20 @@
+'use client';
+
+import { useTranslations } from 'next-intl';
 import { useSelectedItemsStore } from '../../store/selectedItemsStore';
-import { downloadCsv } from '../../utils/csv';
 import { getFlyoutSummary } from './flyoutHelpers';
 import './Flyout.css';
 
-function Flyout() {
+export default function Flyout() {
+  const t = useTranslations('flyout');
   const selectedItems = useSelectedItemsStore((state) => state.selectedItems);
   const unselectAll = useSelectedItemsStore((state) => state.unselectAll);
 
   const items = Object.values(selectedItems);
-
-  if (items.length === 0) {
-    return null;
-  }
+  if (items.length === 0) return null;
 
   const { visibleThumbnails, extraCount } = getFlyoutSummary(items);
+  const csvHref = `/api/csv?ids=${items.map((i) => i.id).join(',')}`;
 
   return (
     <div className="flyout">
@@ -32,23 +33,19 @@ function Flyout() {
           )}
         </div>
         <span className="flyout__count">
-          {items.length} {items.length === 1 ? 'item' : 'items'} selected
+          {items.length === 1
+            ? t('item', { count: items.length })
+            : t('items', { count: items.length })}
         </span>
       </div>
-
       <div className="flyout__actions">
         <button className="flyout__button" onClick={unselectAll}>
-          Unselect all
+          {t('unselectAll')}
         </button>
-        <button
-          className="flyout__button flyout__button--primary"
-          onClick={() => downloadCsv(items)}
-        >
-          Download
-        </button>
+        <a className="flyout__button flyout__button--primary" href={csvHref}>
+          {t('download')}
+        </a>
       </div>
     </div>
   );
 }
-
-export default Flyout;
