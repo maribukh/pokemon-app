@@ -1,0 +1,27 @@
+/* [project]/src/components/ThemeToggle/ThemeToggle.css [app-client] (css) */
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: var(--code-bg);
+  cursor: pointer;
+  border-radius: 999px;
+  align-items: center;
+  width: 40px;
+  height: 22px;
+  padding: 2px;
+  transition: background-color .3s, border-color .3s;
+  display: flex;
+}
+
+.theme-toggle__thumb {
+  background: var(--text-h);
+  border-radius: 50%;
+  width: 16px;
+  height: 16px;
+  transition: transform .2s, background-color .3s;
+}
+
+.theme-toggle[aria-pressed="true"] .theme-toggle__thumb {
+  transform: translateX(18px);
+}
+
+/*# sourceMappingURL=src_components_ThemeToggle_ThemeToggle_css_1igg3k2._.single.css.map*/

@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["file:///Users/mari/pokemon-app/src/styles/NotFound.css"],"sourcesContent":[".not-found-page {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  min-height: 60vh;\n  text-align: center;\n  color: var(--text);\n  transition: color 0.3s ease;\n}\n\n.not-found-page h1 {\n  font-size: 4rem;\n  color: var(--text-h);\n  transition: color 0.3s ease;\n}\n\n.not-found-page__link {\n  margin-top: 16px;\n  color: var(--text-h);\n  font-weight: 700;\n  text-decoration: underline;\n  transition: color 0.3s ease;\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;;;AAWA;;;;;;AAMA"}}]
+}

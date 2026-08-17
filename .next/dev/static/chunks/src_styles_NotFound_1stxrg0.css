@@ -1,0 +1,27 @@
+/* [project]/src/styles/NotFound.css [app-client] (css) */
+.not-found-page {
+  text-align: center;
+  min-height: 60vh;
+  color: var(--text);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: color .3s;
+  display: flex;
+}
+
+.not-found-page h1 {
+  color: var(--text-h);
+  font-size: 4rem;
+  transition: color .3s;
+}
+
+.not-found-page__link {
+  color: var(--text-h);
+  margin-top: 16px;
+  font-weight: 700;
+  text-decoration: underline;
+  transition: color .3s;
+}
+
+/*# sourceMappingURL=src_styles_NotFound_1stxrg0.css.map*/

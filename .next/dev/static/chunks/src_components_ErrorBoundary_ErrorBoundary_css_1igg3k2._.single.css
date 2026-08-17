@@ -1,0 +1,79 @@
+/* [project]/src/components/ErrorBoundary/ErrorBoundary.css [app-client] (css) */
+.fatal-screen {
+  background: var(--bg);
+  z-index: 10000;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: background-color .3s;
+  display: flex;
+  position: fixed;
+  inset: 0;
+}
+
+.fatal-card {
+  background: var(--surface);
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  border-radius: 24px;
+  width: 100%;
+  max-width: 400px;
+  padding: 52px 44px;
+  transition: background-color .3s, border-color .3s;
+}
+
+.fatal-icon {
+  color: #dc2626;
+  background: #dc262614;
+  border: 1px solid #dc262633;
+  border-radius: 14px;
+  justify-content: center;
+  align-items: center;
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 20px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  display: flex;
+}
+
+.fatal-card h2 {
+  color: var(--text-h);
+  margin-bottom: 8px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  transition: color .3s;
+}
+
+.fatal-card p {
+  color: var(--text);
+  margin-bottom: 26px;
+  font-size: .9rem;
+  line-height: 1.5;
+  transition: color .3s;
+}
+
+.reset-btn {
+  background: var(--text-h);
+  color: var(--bg);
+  cursor: pointer;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 26px;
+  font-size: .82rem;
+  font-weight: 700;
+  transition: opacity .2s, background-color .3s, color .3s;
+}
+
+.reset-btn:hover {
+  opacity: .85;
+}
+
+@media (max-width: 480px) {
+  .fatal-card {
+    padding: 36px 24px;
+  }
+}
+
+/*# sourceMappingURL=src_components_ErrorBoundary_ErrorBoundary_css_1igg3k2._.single.css.map*/

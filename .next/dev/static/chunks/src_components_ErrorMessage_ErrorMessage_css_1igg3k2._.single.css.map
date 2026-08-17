@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/components/ErrorMessage/ErrorMessage.css"],"sourcesContent":[".error-message {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  justify-content: center;\n  gap: 14px;\n  padding: 100px 20px;\n  max-width: 400px;\n  margin: 0 auto;\n  text-align: center;\n}\n\n.error-message__mark {\n  width: 40px;\n  height: 40px;\n  border: 1px solid var(--border);\n  border-radius: 12px;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  font-family: var(--mono);\n  font-size: 0.9rem;\n  font-weight: 700;\n  color: var(--text);\n  opacity: 0.5;\n  transition:\n    border-color 0.3s ease,\n    color 0.3s ease;\n}\n\n.error-message__text {\n  font-size: 0.9rem;\n  color: var(--text);\n  line-height: 1.5;\n  transition: color 0.3s ease;\n}\n\n@media (max-width: 480px) {\n  .error-message {\n    padding: 70px 20px;\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;;;;AAYA;;;;;;;;;;;;;;;;AAkBA;;;;;;;AAOA;EACE"}}]
+}

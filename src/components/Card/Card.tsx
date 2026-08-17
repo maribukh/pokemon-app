@@ -56,6 +56,7 @@ function Card({ id, name, types, imageUrl }: CardProps) {
             alt={name}
             fill
             sizes="200px"
+            unoptimized
             style={{ objectFit: 'contain' }}
             onError={() => setImgError(true)}
           />

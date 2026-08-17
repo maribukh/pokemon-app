@@ -1,0 +1,28 @@
+{
+  "node": {
+    "60b2e54ed819b01b15a34620e339acd5497f470cd5": {
+      "workers": {
+        "app/[locale]/page": {
+          "moduleId": "[project]/.next-internal/server/app/[locale]/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/components/SearchForm/actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/components/RefreshButton/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/components/SearchForm/actions.ts",
+      "exportedName": "searchAction"
+    },
+    "003650a5c9e6e08a461631778abf873f72961552ba": {
+      "workers": {
+        "app/[locale]/page": {
+          "moduleId": "[project]/.next-internal/server/app/[locale]/page/actions.js { ACTIONS_MODULE0 => \"[project]/src/components/SearchForm/actions.ts [app-rsc] (ecmascript)\", ACTIONS_MODULE1 => \"[project]/src/components/RefreshButton/actions.ts [app-rsc] (ecmascript)\" } [app-rsc] (server actions loader, ecmascript)",
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "filename": "src/components/RefreshButton/actions.ts",
+      "exportedName": "refreshPokemonDataAction"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "DP9ahEN2Pqavu/5NZiIvLGnpkFDXw0INGmRwmR8K5bc="
+}

@@ -1,0 +1,78 @@
+/* [project]/src/components/DetailsPanel/DetailsPanel.css [app-client] (css) */
+.details-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  text-align: center;
+  border-radius: 20px;
+  padding: 24px;
+  transition: background-color .3s, border-color .3s;
+  position: relative;
+}
+
+.details-card__close {
+  border: 1px solid var(--border);
+  cursor: pointer;
+  color: var(--text);
+  background: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  font-size: .7rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: border-color .3s, color .3s;
+  display: inline-block;
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+
+.details-card__close:hover {
+  border-color: var(--text-h);
+  color: var(--text-h);
+}
+
+.details-card__image-wrap {
+  width: 160px;
+  height: 160px;
+  margin: 40px auto 12px;
+  position: relative;
+}
+
+.details-card__name {
+  text-transform: capitalize;
+  color: var(--text-h);
+  margin-bottom: 8px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  transition: color .3s;
+}
+
+.details-card__types {
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  display: flex;
+}
+
+.details-card__type-tag {
+  font-family: var(--mono);
+  text-transform: uppercase;
+  color: var(--type-accent, var(--text));
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: .65rem;
+  font-weight: 700;
+  transition: border-color .3s, color .3s;
+}
+
+.details-card__stats {
+  color: var(--text);
+  flex-direction: column;
+  gap: 6px;
+  font-size: .85rem;
+  transition: color .3s;
+  display: flex;
+}
+
+/*# sourceMappingURL=src_components_DetailsPanel_DetailsPanel_css_1igg3k2._.single.css.map*/
