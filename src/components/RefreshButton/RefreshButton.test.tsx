@@ -26,4 +26,15 @@ describe('RefreshButton', () => {
 
     expect(onClick).toHaveBeenCalled();
   });
+  vi.mock('../../i18n/navigation', () => ({
+    useRouter: () => ({ refresh: vi.fn() }),
+  }));
+
+  vi.mock('next-intl', () => ({
+    useTranslations: () => (key: string) => key,
+  }));
+
+  vi.mock('./actions', () => ({
+    refreshPokemonDataAction: vi.fn(),
+  }));
 });

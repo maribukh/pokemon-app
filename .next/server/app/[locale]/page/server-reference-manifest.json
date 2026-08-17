@@ -1,0 +1,27 @@
+{
+  "node": {
+    "607e3efaf7785c277037f0aa1c406ac0cc5bd838b1": {
+      "workers": {
+        "app/[locale]/page": {
+          "moduleId": 64662,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "searchAction",
+      "filename": "src/components/SearchForm/actions.ts"
+    },
+    "008ec2ea1300f35c81c416c65b50fa54922a6b2e3b": {
+      "workers": {
+        "app/[locale]/page": {
+          "moduleId": 64662,
+          "async": false,
+          "codeHash": null
+        }
+      },
+      "exportedName": "refreshPokemonDataAction",
+      "filename": "src/components/RefreshButton/actions.ts"
+    }
+  },
+  "edge": {}
+}

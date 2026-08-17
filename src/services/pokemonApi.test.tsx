@@ -5,6 +5,8 @@ import {
   fetchPokemonDetailsBatch,
 } from './pokemonApi';
 
+const CACHE_OPTIONS = { next: { revalidate: 300, tags: ['pokemon'] } };
+
 describe('pokemonApi', () => {
   beforeEach(() => {
     vi.stubGlobal('fetch', vi.fn());
@@ -30,7 +32,8 @@ describe('pokemonApi', () => {
       const result = await fetchPokemonList(20, 0);
 
       expect(fetch).toHaveBeenCalledWith(
-        'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0'
+        'https://pokeapi.co/api/v2/pokemon?limit=20&offset=0',
+        CACHE_OPTIONS
       );
       expect(result).toEqual(mockResponse);
     });
@@ -58,7 +61,8 @@ describe('pokemonApi', () => {
       const result = await fetchPokemonByName('pikachu');
 
       expect(fetch).toHaveBeenCalledWith(
-        'https://pokeapi.co/api/v2/pokemon/pikachu'
+        'https://pokeapi.co/api/v2/pokemon/pikachu',
+        CACHE_OPTIONS
       );
       expect(result).toEqual(mockPokemon);
     });
@@ -72,7 +76,8 @@ describe('pokemonApi', () => {
       await fetchPokemonByName('PIKACHU');
 
       expect(fetch).toHaveBeenCalledWith(
-        'https://pokeapi.co/api/v2/pokemon/pikachu'
+        'https://pokeapi.co/api/v2/pokemon/pikachu',
+        CACHE_OPTIONS
       );
     });
 
