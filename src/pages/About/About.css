@@ -1,0 +1,17 @@
+.about-page {
+  max-width: 600px;
+  margin: auto auto;
+  padding: 0 20px;
+  text-align: center;
+  color: var(--text);
+}
+
+.about-page h1 {
+  color: var(--text-h);
+  margin-bottom: 16px;
+}
+
+.about-page p {
+  margin-bottom: 12px;
+  line-height: 1.6;
+}
