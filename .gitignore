@@ -23,4 +23,19 @@ dist-ssr
 *.sln
 *.sw?
 
+*.env
+*.next
+
 coverage/.next
+
+# Env files
+.env
+.env.local
+.env*.local
+
+# Next.js
+.next/
+out/
+
+# Coverage
+coverage/

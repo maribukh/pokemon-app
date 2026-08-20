@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/styles/HomePage.css"],"sourcesContent":[".results-section--split {\n  display: grid;\n  grid-template-columns: 1.4fr 1fr;\n  gap: 24px;\n  align-items: start;\n}\n\n.results-section__list {\n  min-width: 0;\n}\n\n.results-section__details {\n  position: sticky;\n  width: 400px;\n  top: 200px;\n}\n\n.results-section__toolbar {\n  display: flex;\n  justify-content: flex-end;\n  max-width: 1200px;\n  margin: 0 auto 16px;\n  padding: 0 24px;\n}\n\n@media (max-width: 768px) {\n  .results-section--split {\n    grid-template-columns: 1fr;\n  }\n\n  .results-section__details {\n    width: auto;\n    position: static;\n  }\n\n  .results-section__toolbar {\n    padding: 0 16px;\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;;AAOA;;;;AAIA;;;;;;AAMA;;;;;;;;AAQA;EACE;;;;EAIA;;;;;EAKA"}}]
-}

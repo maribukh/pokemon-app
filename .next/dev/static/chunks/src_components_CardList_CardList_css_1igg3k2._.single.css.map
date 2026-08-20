@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/src/components/CardList/CardList.css"],"sourcesContent":[".card-list {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));\n  gap: 20px;\n  padding: 32px 24px 80px;\n  max-width: 1200px;\n  margin: 0 auto;\n  text-decoration: none;\n}\n\n.card-list__empty {\n  text-align: center;\n  padding: 80px 20px;\n  color: var(--text);\n  font-size: 1rem;\n}\n\n@media (max-width: 768px) {\n  .card-list {\n    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));\n    gap: 14px;\n    padding: 20px 16px 60px;\n  }\n}\n\n@media (max-width: 480px) {\n  .card-list {\n    grid-template-columns: repeat(2, 1fr);\n    gap: 12px;\n  }\n}\n"],"names":[],"mappings":"AAAA;;;;;;;;;;AAUA;;;;;;;AAOA;EACE;;;;;;;AAOF;EACE"}}]
-}
