@@ -1,0 +1,332 @@
+.explain-ai {
+  margin-top: 28px;
+  justify-content: center;
+}
+
+.explain-ai__card {
+  animation: explain-ai-appear 0.35s ease both;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  margin-top: 4px;
+  padding: 28px 32px;
+  transition:
+    box-shadow 0.25s ease,
+    transform 0.2s ease;
+}
+
+.explain-ai__card:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.explain-ai__card-header {
+  align-items: center;
+  display: flex;
+  gap: 24px;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  flex-wrap: wrap;
+}
+
+.explain-ai__title {
+  color: var(--text-h);
+  font-family: var(--heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.explain-ai__badge {
+  align-items: center;
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 999px;
+  color: var(--text);
+  display: inline-flex;
+  font-family: var(--mono);
+  font-size: 0.65rem;
+  flex-shrink: 0;
+  gap: 8px;
+  line-height: 1.4;
+  max-width: 100%;
+  padding: 8px 14px;
+  text-align: right;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.explain-ai__badge-icon {
+  align-items: center;
+  border: 1.5px solid currentColor;
+  border-radius: 50%;
+  display: inline-flex;
+  font-family: var(--nun);
+  font-size: 0.65rem;
+  font-weight: 800;
+  height: 16px;
+  justify-content: center;
+  width: 16px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.explain-ai__button {
+  align-items: center;
+  background: var(--text-h);
+  border: 0;
+  border-radius: 10px;
+  color: var(--surface);
+  cursor: pointer;
+  display: inline-flex;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  gap: 10px;
+  padding: 12px 20px;
+  transition:
+    background-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.explain-ai__button:hover:not(:disabled),
+.explain-ai__button:focus-visible {
+  background: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.explain-ai__button:disabled {
+  cursor: wait;
+  opacity: 0.65;
+  transform: none;
+  box-shadow: none;
+}
+
+.explain-ai__spinner {
+  border: 2.5px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  animation: explain-ai-spin 0.7s linear infinite;
+}
+
+.explain-ai__error,
+.explain-ai__result {
+  font-size: 0.82rem;
+  line-height: 1.6;
+  margin: 12px 0 0;
+}
+
+.explain-ai__error {
+  color: var(--text-h);
+  background: rgba(255, 0, 0, 0.06);
+  padding: 14px 18px;
+  border-radius: 12px;
+  border-left: 4px solid var(--accent);
+}
+
+.explain-ai__result {
+  font-size: 0.92rem;
+  color: var(--text-h);
+  line-height: 1.9;
+  margin: 0 0 28px;
+  white-space: pre-wrap;
+  padding: 4px 0;
+  background: var(--surface);
+  border-radius: 8px;
+}
+
+.explain-ai__regenerate {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 600;
+  min-height: 42px;
+  padding: 10px 20px;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease,
+    transform 0.2s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  width: auto;
+  min-width: 120px;
+  letter-spacing: 0.01em;
+}
+
+.explain-ai__regenerate:hover:not(:disabled),
+.explain-ai__regenerate:focus-visible {
+  background: var(--accent-bg);
+  border-color: var(--accent-border);
+  color: var(--text-h);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.explain-ai__regenerate:disabled {
+  cursor: wait;
+  opacity: 0.65;
+  transform: none;
+  box-shadow: none;
+}
+
+.explain-ai__regenerate:active:not(:disabled) {
+  transform: translateY(0px);
+}
+
+.explain-ai__sr-only {
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  width: 1px;
+  clip: rect(0, 0, 0, 0);
+}
+
+@keyframes explain-ai-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes explain-ai-appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* === Responsive === */
+
+@media (max-width: 768px) {
+  .explain-ai__card {
+    padding: 24px 20px;
+    border-radius: 16px;
+  }
+
+  .explain-ai__card-header {
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .explain-ai__title {
+    font-size: 1.05rem;
+  }
+
+  .explain-ai__badge {
+    font-size: 0.6rem;
+    padding: 6px 12px;
+    gap: 6px;
+  }
+
+  .explain-ai__badge-icon {
+    height: 14px;
+    width: 14px;
+    font-size: 0.58rem;
+  }
+
+  .explain-ai__button {
+    font-size: 0.78rem;
+    padding: 10px 16px;
+    gap: 8px;
+  }
+
+  .explain-ai__result {
+    font-size: 0.88rem;
+    line-height: 1.8;
+    margin-bottom: 22px;
+  }
+
+  .explain-ai__regenerate {
+    font-size: 0.75rem;
+    min-height: 38px;
+    padding: 8px 16px;
+    min-width: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .explain-ai__card-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .explain-ai__badge {
+    text-align: left;
+    width: auto;
+    font-size: 0.58rem;
+    padding: 5px 12px;
+  }
+
+  .explain-ai__card {
+    padding: 18px 14px;
+    border-radius: 14px;
+  }
+
+  .explain-ai__title {
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .explain-ai__result {
+    font-size: 0.84rem;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .explain-ai__regenerate {
+    font-size: 0.72rem;
+    min-height: 36px;
+    padding: 8px 14px;
+    min-width: 80px;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .explain-ai__button {
+    font-size: 0.74rem;
+    padding: 8px 14px;
+    gap: 6px;
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .explain-ai__card {
+    padding: 14px 10px;
+  }
+
+  .explain-ai__title {
+    font-size: 0.92rem;
+  }
+
+  .explain-ai__result {
+    font-size: 0.8rem;
+  }
+
+  .explain-ai__badge {
+    font-size: 0.52rem;
+    padding: 4px 10px;
+  }
+}

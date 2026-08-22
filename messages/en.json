@@ -42,6 +42,23 @@
     "height": "Height",
     "weight": "Weight",
     "hp": "HP",
-    "attack": "Attack"
+    "attack": "Attack",
+    "ai": {
+      "title": "AI explanation",
+      "explain": "Explain this Pokémon with AI",
+      "pending": "Explaining...",
+      "retry": "Try again",
+      "regenerate": "Regenerate explanation",
+      "notice": "AI-generated, may be inaccurate.",
+      "errors": {
+        "missing_key": "AI explanations are temporarily unavailable.",
+        "unauthorized": "AI explanations are temporarily unavailable.",
+        "rate_limited": "Too many requests. Please try again later.",
+        "blocked": "This explanation could not be generated.",
+        "empty_response": "No explanation was returned. Please try again.",
+        "invalid_request": "This Pokémon data could not be explained.",
+        "unknown": "Something went wrong. Please try again."
+      }
+    }
   }
 }

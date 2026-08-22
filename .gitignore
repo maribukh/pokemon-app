@@ -39,3 +39,5 @@ out/
 
 # Coverage
 coverage/
+.env.local
+.env.example

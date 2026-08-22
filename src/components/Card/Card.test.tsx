@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import Card from './Card';
 
 describe('Card', () => {
@@ -28,13 +28,15 @@ describe('Card', () => {
     expect(image).toHaveAttribute('src', baseProps.imageUrl);
   });
 
-  it('falls back to placeholder image on error', () => {
+  it('falls back to placeholder image on error', async () => {
     render(<Card {...baseProps} types={['electric']} />);
     const image = screen.getByRole('img', { name: /pikachu/i });
 
-    image.dispatchEvent(new Event('error'));
+    fireEvent.error(image);
 
-    expect(image).toHaveAttribute('src', '/placeholder.png');
+    await waitFor(() =>
+      expect(image).toHaveAttribute('src', '/placeholder.png')
+    );
   });
 
   it('renders with no types gracefully', () => {

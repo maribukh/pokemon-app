@@ -11,8 +11,10 @@
 
 .results-section__details {
   position: sticky;
+  top: 24px;
   width: 400px;
-  top: 200px;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
 }
 
 .results-section__toolbar {
@@ -29,11 +31,29 @@
   }
 
   .results-section__details {
+    position: fixed;
+    inset: 0;
     width: auto;
-    position: static;
+    max-height: none;
+    z-index: 1000;
+    background: var(--bg);
+    padding: 20px 16px;
+    overflow-y: auto;
+    animation: details-panel-slide-in 0.25s ease;
   }
 
   .results-section__toolbar {
     padding: 0 16px;
+  }
+}
+
+@keyframes details-panel-slide-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

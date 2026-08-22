@@ -5,7 +5,9 @@
   padding: 24px;
   position: relative;
   text-align: center;
-  transition: background-color 0.3s ease, border-color 0.3s ease;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 .details-card__close {
@@ -22,7 +24,9 @@
   color: var(--text);
   text-decoration: none;
   display: inline-block;
-  transition: border-color 0.3s ease, color 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .details-card__close:hover {
@@ -62,7 +66,9 @@
   border: 1px solid var(--border);
   padding: 4px 10px;
   border-radius: 999px;
-  transition: border-color 0.3s ease, color 0.3s ease;
+  transition:
+    border-color 0.3s ease,
+    color 0.3s ease;
 }
 
 .details-card__stats {

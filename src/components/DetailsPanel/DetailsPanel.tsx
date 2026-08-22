@@ -1,9 +1,14 @@
 import { fetchPokemonByName } from '../../services/pokemonApi';
+import { getLocale } from 'next-intl/server';
 import { getTypeColor } from '../../utils/typeColors';
 import { getPokemonImage, getStatValue } from '../../utils/pokemonStats';
+import { buildPokemonExplanationContext } from '../../utils/pokemonExplanationContext';
 import { Link } from '../../i18n/navigation';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
+import ExplainPokemonButton from '../ExplainPokemonButton/ExplainPokemonButton';
 import DetailsImage from './DetailsImage';
+import DetailsStats from './DetailsStats';
+import DetailsTypes from './DetailsTypes';
 import './DetailsPanel.css';
 
 interface DetailsPanelProps {
@@ -40,6 +45,7 @@ export default async function DetailsPanel({
   const color = getTypeColor(primaryType);
   const hp = getStatValue(pokemon, 'hp');
   const attack = getStatValue(pokemon, 'attack');
+  const locale = await getLocale();
 
   return (
     <div
@@ -51,19 +57,17 @@ export default async function DetailsPanel({
       </Link>
       <DetailsImage src={getPokemonImage(pokemon)} alt={pokemon.name} />
       <h2 className="details-card__name">{pokemon.name}</h2>
-      <div className="details-card__types">
-        {pokemon.types.map((t) => (
-          <span key={t.type.name} className="details-card__type-tag">
-            {t.type.name}
-          </span>
-        ))}
-      </div>
-      <div className="details-card__stats">
-        <span>Height: {(pokemon.height / 10).toFixed(1)} m</span>
-        <span>Weight: {(pokemon.weight / 10).toFixed(1)} kg</span>
-        {hp !== undefined && <span>HP: {hp}</span>}
-        {attack !== undefined && <span>Attack: {attack}</span>}
-      </div>
+      <DetailsTypes types={pokemon.types} />
+      <DetailsStats
+        height={pokemon.height}
+        weight={pokemon.weight}
+        hp={hp}
+        attack={attack}
+      />
+      <ExplainPokemonButton
+        key={`${pokemon.id}-${locale}`}
+        context={buildPokemonExplanationContext(pokemon)}
+      />
     </div>
   );
 }
