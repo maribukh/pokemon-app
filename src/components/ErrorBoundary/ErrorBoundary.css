@@ -1,0 +1,81 @@
+.fatal-screen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  padding: 20px;
+  transition: background-color 0.3s ease;
+}
+
+.fatal-card {
+  background: var(--surface);
+  padding: 52px 44px;
+  border-radius: 24px;
+  text-align: center;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  max-width: 400px;
+  width: 100%;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.fatal-icon {
+  width: 52px;
+  height: 52px;
+  background: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  border: 1px solid rgba(220, 38, 38, 0.2);
+}
+
+.fatal-card h2 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 8px;
+  transition: color 0.3s ease;
+}
+
+.fatal-card p {
+  font-size: 0.9rem;
+  color: var(--text);
+  margin-bottom: 26px;
+  line-height: 1.5;
+  transition: color 0.3s ease;
+}
+
+.reset-btn {
+  background: var(--text-h);
+  color: var(--bg);
+  border: none;
+  padding: 12px 26px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    opacity 0.2s ease,
+    background-color 0.3s ease,
+    color 0.3s ease;
+  font-size: 0.82rem;
+}
+
+.reset-btn:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 480px) {
+  .fatal-card {
+    padding: 36px 24px;
+  }
+}

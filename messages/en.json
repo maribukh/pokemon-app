@@ -1,0 +1,64 @@
+{
+  "header": {
+    "home": "Home",
+    "about": "About"
+  },
+  "search": {
+    "placeholder": "Search pokemon...",
+    "button": "Search"
+  },
+  "pagination": {
+    "prev": "Prev",
+    "next": "Next",
+    "page": "Page {current} of {total}"
+  },
+  "refresh": {
+    "idle": "Refresh",
+    "loading": "Refreshing"
+  },
+  "flyout": {
+    "item": "{count} item selected",
+    "items": "{count} items selected",
+    "unselectAll": "Unselect all",
+    "download": "Download"
+  },
+  "error": {
+    "title": "Nothing found",
+    "hint": "No Pok\u00e9mon match that name. Maybe it's hiding in the tall grass?"
+  },
+  "about": {
+    "title": "About Poki Land",
+    "text": "Poki Land is a Pok\u00e9mon search app.",
+    "courseText": "Built as part of the",
+    "courseLink": "RS School course"
+  },
+  "notFound": {
+    "title": "404",
+    "text": "This page does not exist.",
+    "back": "Back to home"
+  },
+  "details": {
+    "close": "Close",
+    "height": "Height",
+    "weight": "Weight",
+    "hp": "HP",
+    "attack": "Attack",
+    "ai": {
+      "title": "AI explanation",
+      "explain": "Explain this Pokémon with AI",
+      "pending": "Explaining...",
+      "retry": "Try again",
+      "regenerate": "Regenerate explanation",
+      "notice": "AI-generated, may be inaccurate.",
+      "errors": {
+        "missing_key": "AI explanations are temporarily unavailable.",
+        "unauthorized": "AI explanations are temporarily unavailable.",
+        "rate_limited": "Too many requests. Please try again later.",
+        "blocked": "This explanation could not be generated.",
+        "empty_response": "No explanation was returned. Please try again.",
+        "invalid_request": "This Pokémon data could not be explained.",
+        "unknown": "Something went wrong. Please try again."
+      }
+    }
+  }
+}

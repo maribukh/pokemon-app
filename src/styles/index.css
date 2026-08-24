@@ -1,0 +1,74 @@
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,500,600,700,800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Nunito:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-image: url('/background.jpg');
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #fff;
+  --bg-rgb: 255, 255, 255;
+  --border: #e5e4e7;
+  --surface: #fff;
+  --surface-rgb: 255, 255, 255;
+  --code-bg: #f4f3ec;
+  --accent: #aa3bff;
+  --accent-bg: rgba(170, 59, 255, 0.1);
+  --accent-border: rgba(170, 59, 255, 0.5);
+  --shadow:
+    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  --nun: 'Nunito';
+  --heading: 'Fraunces', serif;
+  --mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  font: 18px/145% var(--nun);
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+[data-theme='dark'] {
+  --text: #a8a3ad;
+  --text-h: #f5f3f7;
+  --bg: #0e0e12;
+  --bg-rgb: 14, 14, 18;
+  --surface: #17171d;
+  --surface-rgb: 23, 23, 29;
+  --border: #2a2a33;
+  --code-bg: #1c1c23;
+  --accent: #b891fa;
+  --accent-bg: rgba(184, 145, 250, 0.14);
+  --accent-border: rgba(184, 145, 250, 0.4);
+  --shadow:
+    rgba(0, 0, 0, 0.5) 0 12px 24px -6px, rgba(0, 0, 0, 0.3) 0 4px 8px -2px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(var(--bg-rgb), 0.88), rgba(var(--bg-rgb), 0.94)),
+    var(--bg-image);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Nunito', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3 {
+  color: var(--text-h);
+  font-weight: 600;
+}
