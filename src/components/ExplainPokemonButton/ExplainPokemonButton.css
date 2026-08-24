@@ -41,12 +41,12 @@
 }
 
 .explain-ai__badge {
-  align-items: center;
   background: var(--accent-bg);
   border: 1px solid var(--accent-border);
   border-radius: 999px;
   color: var(--text);
-  display: inline-flex;
+  display: flex;
+  gap: 8px;
   font-family: var(--mono);
   font-size: 0.65rem;
   flex-shrink: 0;
@@ -54,7 +54,6 @@
   line-height: 1.4;
   max-width: 100%;
   padding: 8px 14px;
-  text-align: right;
   font-weight: 500;
   letter-spacing: 0.02em;
   transition:
@@ -272,7 +271,6 @@
   }
 
   .explain-ai__badge {
-    text-align: left;
     width: auto;
     font-size: 0.58rem;
     padding: 5px 12px;
